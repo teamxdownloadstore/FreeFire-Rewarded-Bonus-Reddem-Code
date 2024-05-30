@@ -21,9 +21,40 @@
     </style>
 </head>
 <body>
-    <video controls>
-        <source src="https://core.mdiskplay.com/box/terabox/video/kCCwcJIjfJrDHG3uOdyuPw.m3u8" type="application/x-mpegURL">
+    <video id="video" controls>
         Your browser does not support the video tag.
     </video>
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const videoUrl = urlParams.get('url');
+
+            if (!videoUrl) {
+                console.error('No video URL provided');
+                return;
+            }
+
+            const video = document.getElementById('video');
+
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(videoUrl);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                // Fallback for Safari on macOS and iOS
+                video.src = videoUrl;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
+            } else {
+                console.error('This browser does not support HLS.');
+            }
+        });
+    </script>
 </body>
-          </html>
+</html>
