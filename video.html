@@ -29,7 +29,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
-            const videoUrl = urlParams.get('url');
+            const videoUrl = urlParams.get('video');
 
             if (!videoUrl) {
                 console.error('No video URL provided');
